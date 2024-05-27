@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://biqw1ddwyksl"]
+
+[ext_resource type="Texture2D" path="res://Art/Characters/Player/Idle/Samurai-Sheet.png" id="1_eril3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcw2h"]
+atlas = ExtResource("1_eril3")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56snk"]
+atlas = ExtResource("1_eril3")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5y8d"]
+atlas = ExtResource("1_eril3")
+region = Rect2(72, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sirk"]
+atlas = ExtResource("1_eril3")
+region = Rect2(108, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7o8i"]
+atlas = ExtResource("1_eril3")
+region = Rect2(144, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3r7n"]
+atlas = ExtResource("1_eril3")
+region = Rect2(180, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufr8h"]
+atlas = ExtResource("1_eril3")
+region = Rect2(216, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug7ql"]
+atlas = ExtResource("1_eril3")
+region = Rect2(252, 0, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvqda"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcw2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56snk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5y8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sirk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7o8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3r7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufr8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug7ql")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0cvfv"]
+radius = 4.0
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -18)
+sprite_frames = SubResource("SpriteFrames_pvqda")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.746425
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_0cvfv")
