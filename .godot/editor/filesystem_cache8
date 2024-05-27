@@ -1,11 +1,13 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1716830841
+::res://::1716832118
 icon.svg::CompressedTexture2D::4789976627004577646::1716822504::1716822504::1::::<><>::
 README.md::TextFile::-1::1716822504::0::1::::<><>::
 ::res://Art/::1716823718
-::res://Art/Characters/::1716823726
+::res://Art/Characters/::1716832118
+::res://Art/Characters/Enemy/::1716832118
+SamuraiEnemy01-Sheet.png::CompressedTexture2D::7316861119110761500::1716832115::1716832118::1::::<><>::
 ::res://Art/Characters/Player/::1716824046
-::res://Art/Characters/Player/Idle/::1716830728
+::res://Art/Characters/Player/Idle/::1716830870
 PlayerSamurai-Idle1.png::CompressedTexture2D::8626151153112386223::1716824074::1716827141::1::::<><>::
 PlayerSamurai-Idle2.png::CompressedTexture2D::2447360750319426387::1716824074::1716824074::1::::<><>::
 PlayerSamurai-Idle3.png::CompressedTexture2D::6711912882017236294::1716824074::1716824074::1::::<><>::
@@ -15,8 +17,8 @@ PlayerSamurai-Idle6.png::CompressedTexture2D::4163862740407613454::1716824074::1
 PlayerSamurai-Idle7.png::CompressedTexture2D::4241067488645345711::1716824074::1716824074::1::::<><>::
 PlayerSamurai-Idle8.png::CompressedTexture2D::1845555597194484877::1716824074::1716824074::1::::<><>::
 Samurai-Sheet.png::CompressedTexture2D::9008625970553605843::1716830690::1716830870::1::::<><>::
-::res://Scenes/::1716830841
-game.tscn::PackedScene::996481132197658222::1716827201::0::1::::<><>::
+::res://Scenes/::1716830889
+game.tscn::PackedScene::996481132197658222::1716830889::0::1::::<><>::res://Scenes/player.tscn<>res://Scripts/player.gd
 player.tscn::PackedScene::-1::1716830841::0::1::::<><>::
 ::res://Scripts/::1716830841
 player.gd::GDScript::-1::1716830841::0::1::::<>CharacterBody2D<>::
