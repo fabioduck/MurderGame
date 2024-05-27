@@ -1,0 +1,117 @@
+[gd_scene load_steps=16 format=3 uid="uid://cjgasfkbgqybo"]
+
+[ext_resource type="Texture2D" uid="uid://dcilvsp8380ia" path="res://Art/Characters/Enemy/SamuraiEnemy01-Sheet.png" id="1_j60hd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxphh"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(0, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jr03"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(36, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j2pk"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(72, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3ylh"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(108, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3r2h"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubg0m"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6cyx"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(72, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16j2r"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(108, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cepu4"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(144, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uke4p"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(180, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_embga"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(216, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kd6a"]
+atlas = ExtResource("1_j60hd")
+region = Rect2(252, 0, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvqda"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxphh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jr03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j2pk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3ylh")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3r2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubg0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6cyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16j2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cepu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uke4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_embga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kd6a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0cvfv"]
+radius = 4.0
+
+[node name="Enemy" type="CharacterBody2D"]
+z_index = 5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7, -18)
+sprite_frames = SubResource("SpriteFrames_pvqda")
+animation = &"idle"
+autoplay = "idle"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_0cvfv")
