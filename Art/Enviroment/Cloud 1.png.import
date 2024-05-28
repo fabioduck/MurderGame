@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7gl34gqqv4mg"
-path="res://.godot/imported/Bird Side-Sheet.png-289d7a76102199db8fbe8218a265730d.ctex"
+uid="uid://daaij0ja4n5m0"
+path="res://.godot/imported/Cloud 1.png-80fbcdb49715e827d75edff54e07d935.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enviroment/Bird/Bird Side-Sheet.png"
-dest_files=["res://.godot/imported/Bird Side-Sheet.png-289d7a76102199db8fbe8218a265730d.ctex"]
+source_file="res://Art/Enviroment/Cloud 1.png"
+dest_files=["res://.godot/imported/Cloud 1.png-80fbcdb49715e827d75edff54e07d935.ctex"]
 
 [params]
 
