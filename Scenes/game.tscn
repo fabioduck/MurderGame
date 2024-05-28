@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ogx5s36fbv4i"]
+[gd_scene load_steps=21 format=3 uid="uid://ogx5s36fbv4i"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
 [ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Scenes/player.tscn" id="1_wwskl"]
@@ -8,8 +8,33 @@
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="5_a202i"]
 [ext_resource type="Script" path="res://Scripts/Text.gd" id="5_gdmrh"]
 [ext_resource type="Texture2D" uid="uid://d4kabukj32vo8" path="res://Art/Enviroment/Sun.png" id="6_upwc4"]
+[ext_resource type="Texture2D" uid="uid://b2fwyx25p8bc7" path="res://Art/Enviroment/Moutain Left.png" id="7_24skh"]
+[ext_resource type="Texture2D" uid="uid://cu7b2yeuk8wii" path="res://Art/Enviroment/Moutain Middle.png" id="8_8vpmg"]
+[ext_resource type="Texture2D" uid="uid://d4jxv41bw48pd" path="res://Art/Enviroment/Sand Tile.png" id="9_dv74w"]
+[ext_resource type="Texture2D" uid="uid://jj2k8nqburx0" path="res://Art/Enviroment/Moutain Right.png" id="9_j5blr"]
+[ext_resource type="Texture2D" uid="uid://c7cvi464l1ut1" path="res://Art/Enviroment/Cactus.png" id="10_a47hv"]
+[ext_resource type="Texture2D" uid="uid://c12rsiarqxmdi" path="res://Art/Enviroment/CactusRound.png" id="11_hp5cp"]
+[ext_resource type="PackedScene" uid="uid://u8ngbyc2eott" path="res://Scenes/Bird.tscn" id="12_r0emn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wu7b"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dvtea"]
+texture = ExtResource("9_dv74w")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_byfns"]
+texture = ExtResource("10_a47hv")
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m4jpy"]
+texture = ExtResource("11_hp5cp")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wvexf"]
+sources/0 = SubResource("TileSetAtlasSource_dvtea")
+sources/1 = SubResource("TileSetAtlasSource_byfns")
+sources/2 = SubResource("TileSetAtlasSource_m4jpy")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_84eur")
@@ -44,7 +69,7 @@ position = Vector2(51, -2)
 script = ExtResource("5_a202i")
 
 [node name="Sun" type="Sprite2D" parent="."]
-position = Vector2(1, -40)
+position = Vector2(0, -64)
 scale = Vector2(1.92188, 1.92188)
 texture = ExtResource("6_upwc4")
 
@@ -64,13 +89,74 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -4.0
-offset_top = -63.0
+offset_top = -71.0
 offset_right = 4.0
-offset_bottom = -44.0
+offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
 fit_content = true
 autowrap_mode = 0
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1
+tile_set = SubResource("TileSet_wvexf")
+format = 2
+layer_0/tile_data = PackedInt32Array(131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 131074, 0, 0, 131073, 0, 0, 131072, 0, 0, 196607, 0, 0, 196606, 0, 0, 196605, 0, 0, 196604, 0, 0, 196603, 0, 0, 196602, 0, 0, 196601, 0, 0, 196600, 0, 0, 196599, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 65544, 0, 0, 65543, 0, 0, 65542, 0, 0, 65541, 0, 0, 65540, 0, 0, 65539, 0, 0, 131069, 0, 0, 131068, 0, 0, 131067, 0, 0, 131066, 0, 0, 131065, 0, 0, 131064, 0, 0, 131063, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, -131065, 1, 0, -65529, 1, 1, -65531, 2, 0, -8, 2, 0, -5, 2, 0, -6, 1, 1, -65542, 1, 0)
+
+[node name="Bird1" parent="." instance=ExtResource("12_r0emn")]
+position = Vector2(-149, -74)
+
+[node name="Bird2" parent="." instance=ExtResource("12_r0emn")]
+position = Vector2(-164, -64)
+
+[node name="Bird3" parent="." instance=ExtResource("12_r0emn")]
+position = Vector2(-156, -79)
+
+[node name="Bird4" parent="." instance=ExtResource("12_r0emn")]
+position = Vector2(-164, -83)
+
+[node name="Bird5" parent="." instance=ExtResource("12_r0emn")]
+position = Vector2(-156, -69)
+
+[node name="MoutainMiddle" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-111, -15)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle" type="Sprite2D" parent="MoutainMiddle"]
+z_index = -2
+position = Vector2(32, -1)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainLeft" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-143, -16)
+texture = ExtResource("7_24skh")
+
+[node name="MoutainRight" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-47, -16)
+texture = ExtResource("9_j5blr")
+
+[node name="MoutainMiddle" type="Sprite2D" parent="MoutainRight"]
+z_index = -2
+position = Vector2(119, 1)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle" type="Sprite2D" parent="MoutainRight/MoutainMiddle"]
+z_index = -2
+position = Vector2(32, -1)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainLeft" type="Sprite2D" parent="MoutainRight"]
+z_index = -2
+position = Vector2(87, 0)
+texture = ExtResource("7_24skh")
+
+[node name="MoutainRight" type="Sprite2D" parent="MoutainRight"]
+z_index = -2
+position = Vector2(183, 0)
+texture = ExtResource("9_j5blr")
 
 [connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]
 [connection signal="timeout" from="Start_Delay" to="Enemy" method="_on_start_delay_timeout"]
