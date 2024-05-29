@@ -6,10 +6,12 @@ extends Node2D
 @onready var round_text = $Round_Text
 @onready var start_vfx = $Start_VFX
 @onready var start_delay = $Start_Delay
+@onready var music = $Music
 
 var running = false
 var round_over = false
 var resetting = false
+var music_muted = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,6 +20,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if Input.is_action_just_pressed("mute"):
+		if !music_muted:
+			music_muted = true
+			music.stop()
+		else:
+			music_muted = false
+			music.play()
 	if(running and !round_over):
 		round_text.clear()
 		if enemy.dead and !player.dead:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ogx5s36fbv4i"]
+[gd_scene load_steps=35 format=3 uid="uid://ogx5s36fbv4i"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
 [ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Prefabs/player.tscn" id="1_wwskl"]
@@ -72,6 +72,20 @@ sources/13 = SubResource("TileSetAtlasSource_y5pfi")
 sources/15 = SubResource("TileSetAtlasSource_a3w3j")
 sources/16 = SubResource("TileSetAtlasSource_1b308")
 
+[sub_resource type="Gradient" id="Gradient_1elg0"]
+colors = PackedColorArray(0.995489, 0.79388, 0.531319, 1, 0.321417, 0.546375, 0.576299, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ebhd1"]
+gradient = SubResource("Gradient_1elg0")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_ybce2"]
+colors = PackedColorArray(0.818597, 0.359685, 0.0879094, 1, 0.476569, 0.605388, 0.781805, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_to7e5"]
+gradient = SubResource("Gradient_ybce2")
+fill_from = Vector2(1, 1)
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_84eur")
 
@@ -98,7 +112,7 @@ autostart = true
 script = ExtResource("4_74j6p")
 
 [node name="Sun" type="Sprite2D" parent="."]
-z_index = -4096
+z_index = -100
 position = Vector2(0, -64)
 scale = Vector2(1.92188, 1.92188)
 texture = ExtResource("6_upwc4")
@@ -270,5 +284,31 @@ texture = ExtResource("9_j5blr")
 z_index = -10
 position = Vector2(-171, -126)
 scale = Vector2(0.332387, 0.332387)
+
+[node name="Sky" type="TextureRect" parent="."]
+visible = false
+z_index = -4096
+offset_left = -146.0
+offset_top = -121.0
+offset_right = 146.0
+offset_bottom = 76.0
+texture = SubResource("GradientTexture2D_ebhd1")
+
+[node name="Sky3" type="TextureRect" parent="."]
+z_index = -4096
+offset_left = -146.0
+offset_top = -121.0
+offset_right = 146.0
+offset_bottom = 76.0
+texture = SubResource("GradientTexture2D_to7e5")
+
+[node name="Sky2" type="TextureRect" parent="."]
+visible = false
+z_index = -4096
+offset_left = -146.0
+offset_top = -121.0
+offset_right = 146.0
+offset_bottom = 76.0
+texture = SubResource("GradientTexture2D_ebhd1")
 
 [connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]

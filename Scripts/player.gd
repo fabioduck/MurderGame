@@ -8,6 +8,7 @@ extends Area2D
 @onready var hit_sfx = $Hit_SFX
 
 
+
 const SPEED = 300
 var sword_speed = 1.5
 
@@ -31,7 +32,6 @@ func _process(_delta):
 		attacking = true
 		if !game.round_over:
 			animated_sprite.play("attack")
-	
 
 func _physics_process(delta):
 	if attacking and !hit_detected:
