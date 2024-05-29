@@ -7,8 +7,12 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if(running):
 		clear()
 		var time_elapsed = (Time.get_ticks_msec() - start_time) * 0.1
 		add_text(str(time_elapsed).pad_decimals(0))
+	
+func reset():
+	clear()
+	add_text("0")

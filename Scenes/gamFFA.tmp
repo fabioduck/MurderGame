@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ogx5s36fbv4i"]
+[gd_scene load_steps=22 format=3 uid="uid://ogx5s36fbv4i"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
 [ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Prefabs/player.tscn" id="1_wwskl"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dal1cmjie4nm3" path="res://Prefabs/enemy.tscn" id="12_35g4t"]
 [ext_resource type="AudioStream" uid="uid://u7biq6oy2b1c" path="res://Sounds/slam.mp3" id="13_d3hws"]
 [ext_resource type="AudioStream" uid="uid://cm8mtx3pnevu5" path="res://Sounds/transist-2.mp3" id="14_ak5tc"]
+[ext_resource type="Script" path="res://Scripts/player_spawner.gd" id="14_egl2x"]
+[ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="16_msdt7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wu7b"]
 
@@ -141,11 +143,17 @@ stream = ExtResource("13_d3hws")
 stream = ExtResource("14_ak5tc")
 autoplay = true
 
-[node name="Player" parent="." instance=ExtResource("1_wwskl")]
+[node name="Player_Spawner" type="Node2D" parent="."]
 position = Vector2(-50, 0)
+script = ExtResource("14_egl2x")
 
-[node name="Enemy" parent="." instance=ExtResource("12_35g4t")]
+[node name="Player" parent="Player_Spawner" instance=ExtResource("1_wwskl")]
+
+[node name="Enemy_Spawner" type="Node2D" parent="."]
 position = Vector2(50, 0)
+script = ExtResource("16_msdt7")
+
+[node name="Enemy" parent="Enemy_Spawner" instance=ExtResource("12_35g4t")]
 rotation = -3.14159
 scale = Vector2(1, -1)
 

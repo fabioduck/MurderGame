@@ -8,7 +8,7 @@ const SPEED = 200
 var sword_speed = GlobalVariables.current_level * 0.2 + 1
 
 var dead = false
-var sword_hit = true
+var sword_hit = false
 var hit_detected = false
 # Remove?
 var attacking = false
@@ -39,20 +39,29 @@ func toggleSword():
 	sword.monitoring = !sword.monitoring
 	sword.visible = !sword.visible
 	
-func handleHit(opponent, is_sword):
+func handleHit(_opponent, is_sword):
 	if !hit_detected:
 		if !is_sword:
 			# RIP :(
 			dead = true
-			toggleSword()
 			animated_sprite.play("idle")
 			animated_sprite.pause()
 		attacking = false
 		hit_detected = true
 
 
-func _on_start_delay_timeout():
+func attack():
 	await get_tree().create_timer(1.0/GlobalVariables.current_level).timeout
 	attacking = true
 	if !game.round_over:
 			animated_sprite.play("attack")
+			
+func reset():
+	position = Vector2(50, 0)
+	dead = false
+	sword_hit = false
+	hit_detected = false
+	attacking = false
+	sword_speed = GlobalVariables.current_level * 0.2 + 1
+	animated_sprite.play("idle")
+	_ready()
