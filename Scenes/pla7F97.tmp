@@ -1,0 +1,130 @@
+[gd_scene load_steps=18 format=3 uid="uid://biqw1ddwyksl"]
+
+[ext_resource type="Texture2D" uid="uid://bwhi37epme6xf" path="res://Art/Characters/Player/Samurai-Sheet.png" id="1_4ytdr"]
+[ext_resource type="Script" path="res://scripts/player_new.gd" id="1_rtrup"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwg0i"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(0, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v28bm"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(36, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3u6pn"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(72, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcfw6"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(108, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bsom"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_for5x"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oanj8"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(72, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdobh"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(108, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7pn7"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(144, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l6yh"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(180, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xbw6"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(216, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwh6x"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(252, 0, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0fcot"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwg0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v28bm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u6pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcfw6")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bsom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_for5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oanj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdobh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7pn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l6yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xbw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwh6x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcfhb"]
+size = Vector2(5, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_id7oy"]
+size = Vector2(7, 3)
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_rtrup")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -18)
+sprite_frames = SubResource("SpriteFrames_0fcot")
+animation = &"attack"
+autoplay = "idle"
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(-7.5, -7.5)
+shape = SubResource("RectangleShape2D_qcfhb")
+
+[node name="Sword_HitBox" type="Area2D" parent="."]
+
+[node name="Sword_HitBox" type="CollisionShape2D" parent="Sword_HitBox"]
+position = Vector2(14.5, -11.5)
+shape = SubResource("RectangleShape2D_id7oy")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Sword_HitBox" to="." method="_on_sword_hit_box_area_entered"]

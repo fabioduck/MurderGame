@@ -17,19 +17,24 @@ func _ready():
 func _process(delta):
 	if(running and !round_over):
 		round_text.clear()
-		if player.attacking and enemy.attacking:
+		if player.dead and enemy.dead:
+			# This is mostly in for fun. Probably a waste but the game is tiny, who cares.
 			round_over = true
-			round_text.add_text("Tie")
+			round_text.add_text("How did this happen?")
 			running = false
-		elif player.attacking:
+		elif enemy.dead:
 			round_over = true
 			round_text.add_text("You win!")
 			GlobalVariables.current_level += 1
 			running = false
-		elif enemy.attacking:
+		elif player.dead:
 			round_over = true
 			round_text.add_text("You lose!")
 			GlobalVariables.current_level = 1
+			running = false
+		elif player.hit_detected and !player.dead and !enemy.dead:
+			round_over = true
+			round_text.add_text("Tie!")
 			running = false
 		timer_text.running = running
 	elif player.attacking and !running and !round_over:

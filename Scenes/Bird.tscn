@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://u8ngbyc2eott"]
 
-[ext_resource type="Script" path="res://Scripts/Bird.gd" id="1_2m17u"]
+[ext_resource type="Script" path="res://Scripts/Bird.gd" id="1_8ei1m"]
 [ext_resource type="Texture2D" uid="uid://d1of061jrk7xg" path="res://Art/Enviroment/Bird/Bird Side-Sheet.png" id="1_lktio"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1roy2"]
@@ -61,9 +61,9 @@ animations = [{
 }]
 
 [node name="Bird" type="CharacterBody2D"]
-script = ExtResource("1_2m17u")
+script = ExtResource("1_8ei1m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3c1ri")
 autoplay = "default"
-frame_progress = 0.227159
+frame_progress = 0.823282
