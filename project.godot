@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GlobalVariables="*res://global_variables.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="Murder Game"
