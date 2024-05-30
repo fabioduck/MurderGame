@@ -37,7 +37,7 @@ func _process(_delta):
 			running = false
 		elif player.dead:
 			round_over = true
-			round_text.add_text("You lose!")
+			round_text.add_text("You Died\nLevel: %s" % GlobalVariables.current_level)
 			GlobalVariables.current_level = 1
 			running = false
 		elif player.hit_detected and !player.dead and !enemy.dead:
@@ -53,7 +53,7 @@ func _process(_delta):
 		round_text.add_text("Cheater")
 		GlobalVariables.current_level = 1
 	if round_over and !resetting:
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(0.8).timeout
 		reload()
 	
 func _on_start_delay_timeout():
