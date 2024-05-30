@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ogx5s36fbv4i"]
+[gd_scene load_steps=38 format=3 uid="uid://ogx5s36fbv4i"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
 [ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Prefabs/player.tscn" id="1_wwskl"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://cm8mtx3pnevu5" path="res://Sounds/transist-2.mp3" id="14_ak5tc"]
 [ext_resource type="PackedScene" uid="uid://car31oan6jj80" path="res://Prefabs/clouds.tscn" id="20_4c71n"]
 [ext_resource type="PackedScene" uid="uid://b2gghu4ypn56u" path="res://Prefabs/bird.tscn" id="21_kjfvq"]
+[ext_resource type="Shader" path="res://Shaders/game.gdshader" id="22_uxl82"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wu7b"]
 
@@ -87,12 +88,16 @@ colors = PackedColorArray(0.818597, 0.359685, 0.0879094, 1, 0.476569, 0.605388, 
 gradient = SubResource("Gradient_ybce2")
 fill_from = Vector2(1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyxu6"]
+shader = ExtResource("22_uxl82")
+shader_parameter/scan_line_count = 171.345
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_84eur")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -40)
-zoom = Vector2(4, 4)
+zoom = Vector2(3.79, 3.79)
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
@@ -119,10 +124,10 @@ scale = Vector2(1.92188, 1.92188)
 texture = ExtResource("6_upwc4")
 
 [node name="Level_Text" type="RichTextLabel" parent="."]
-offset_left = -144.0
-offset_top = -125.0
-offset_right = -74.0
-offset_bottom = -79.0
+offset_left = -135.0
+offset_top = -119.0
+offset_right = -65.0
+offset_bottom = -73.0
 text = "Level: 1"
 fit_content = true
 autowrap_mode = 0
@@ -313,5 +318,16 @@ texture = SubResource("GradientTexture2D_ebhd1")
 
 [node name="AnimatedSprite2D" parent="." instance=ExtResource("21_kjfvq")]
 position = Vector2(-139, -61)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_kyxu6")
+offset_left = -192.0
+offset_top = -148.0
+offset_right = -152.0
+offset_bottom = -108.0
+scale = Vector2(9.4897, 6.16337)
 
 [connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]
