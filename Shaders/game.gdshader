@@ -21,7 +21,7 @@ void fragment() {
 	float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*-1.0), 0.0).b;
 	
 	float s = sin(uv_curve(SCREEN_UV).y * scan_line_count * PI * 2.0);
-	s = (s * 0.5 + 0.5) * 0.9 + 0.6;
+	s = (s * 0.5 + 0.5) * 0.9 + 0.85;
 	vec4 scan_line = vec4(vec3(pow(s,0.25)), 1.0);
 	COLOR = vec4(r,g,b, 1.0) * scan_line;
 }

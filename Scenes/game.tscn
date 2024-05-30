@@ -90,7 +90,7 @@ fill_from = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kyxu6"]
 shader = ExtResource("22_uxl82")
-shader_parameter/scan_line_count = 171.345
+shader_parameter/scan_line_count = 92.67
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_84eur")

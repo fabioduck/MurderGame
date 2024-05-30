@@ -32,11 +32,13 @@ func _process(_delta):
 		round_text.clear()
 		if enemy.dead and !player.dead:
 			round_over = true
+			round_text.push_color(Color(0.2, 0.75, 0.2))
 			round_text.add_text("You win!")
 			GlobalVariables.current_level += 1
 			running = false
 		elif player.dead:
 			round_over = true
+			round_text.push_color(Color(0.8, 0.2, 0.2))
 			round_text.add_text("You Died\nLevel: %s" % GlobalVariables.current_level)
 			GlobalVariables.current_level = 1
 			running = false
@@ -50,6 +52,7 @@ func _process(_delta):
 	elif player.attacking and !running and !round_over:
 		round_over = true
 		round_text.clear()
+		round_text.push_color(Color(0.8, 0.2, 0.2))
 		round_text.add_text("Cheater")
 		GlobalVariables.current_level = 1
 	if round_over and !resetting:
