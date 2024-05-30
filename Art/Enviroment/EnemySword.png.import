@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1l30vd4cqvlj"
-path="res://.godot/imported/Samurai-Sheet.png-0bd824ede038376b75fcff724148cc9b.ctex"
+uid="uid://cbh7e0e7c6t3h"
+path="res://.godot/imported/EnemySword.png-0244f6a39e8dec7e80f3f58500554546.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Characters/Player/Idle/Samurai-Sheet.png"
-dest_files=["res://.godot/imported/Samurai-Sheet.png-0bd824ede038376b75fcff724148cc9b.ctex"]
+source_file="res://Art/Enviroment/EnemySword.png"
+dest_files=["res://.godot/imported/EnemySword.png-0244f6a39e8dec7e80f3f58500554546.ctex"]
 
 [params]
 
