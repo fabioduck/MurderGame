@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ogx5s36fbv4i"]
+[gd_scene load_steps=36 format=3 uid="uid://ogx5s36fbv4i"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
 [ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Prefabs/player.tscn" id="1_wwskl"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://u7biq6oy2b1c" path="res://Sounds/slam.mp3" id="13_d3hws"]
 [ext_resource type="AudioStream" uid="uid://cm8mtx3pnevu5" path="res://Sounds/transist-2.mp3" id="14_ak5tc"]
 [ext_resource type="PackedScene" uid="uid://car31oan6jj80" path="res://Prefabs/clouds.tscn" id="20_4c71n"]
+[ext_resource type="PackedScene" uid="uid://b2gghu4ypn56u" path="res://Prefabs/bird.tscn" id="21_kjfvq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wu7b"]
 
@@ -310,5 +311,8 @@ offset_top = -121.0
 offset_right = 146.0
 offset_bottom = 76.0
 texture = SubResource("GradientTexture2D_ebhd1")
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("21_kjfvq")]
+position = Vector2(-139, -61)
 
 [connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]

@@ -10,7 +10,7 @@ extends Area2D
 
 
 const SPEED = 300
-var sword_speed = 1.5
+var sword_speed = 2.5
 
 var dead = false
 var sword_hit = false
@@ -23,7 +23,7 @@ func _ready():
 	sword.monitorable = false
 	sword.monitoring = false
 	sword.visible = false
-	animated_sprite.speed_scale = sword_speed
+	animated_sprite.speed_scale = 1.5
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,6 +31,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("attack"):
 		attacking = true
 		if !game.round_over:
+			animated_sprite.speed_scale = sword_speed
 			animated_sprite.play("attack")
 
 func _physics_process(delta):
@@ -73,6 +74,7 @@ func reset():
 	sword_hit = false
 	hit_detected = false
 	attacking = false
+	animated_sprite.speed_scale = 1.5
 	animated_sprite.play("idle")
 	_ready()
 	

@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://b2gghu4ypn56u"]
+
+[ext_resource type="Texture2D" uid="uid://c7gl34gqqv4mg" path="res://Art/Enviroment/Bird/Bird Side-Sheet.png" id="1_i6g8d"]
+[ext_resource type="Script" path="res://Scripts/bird.gd" id="2_hryhw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f8y7"]
+atlas = ExtResource("1_i6g8d")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efnrm"]
+atlas = ExtResource("1_i6g8d")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2rf0"]
+atlas = ExtResource("1_i6g8d")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xybf"]
+atlas = ExtResource("1_i6g8d")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j5fe"]
+atlas = ExtResource("1_i6g8d")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soijs"]
+atlas = ExtResource("1_i6g8d")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv8sn"]
+atlas = ExtResource("1_i6g8d")
+region = Rect2(48, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jx63t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f8y7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efnrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2rf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xybf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j5fe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soijs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qv8sn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_jx63t")
+autoplay = "default"
+frame_progress = 0.667096
+script = ExtResource("2_hryhw")
