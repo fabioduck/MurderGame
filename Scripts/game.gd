@@ -12,6 +12,7 @@ var running = false
 var round_over = false
 var resetting = false
 var music_muted = false
+var parry = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,9 +41,11 @@ func _process(_delta):
 			GlobalVariables.current_level = 1
 			running = false
 		elif player.hit_detected and !player.dead and !enemy.dead:
-			round_over = true
-			round_text.add_text("Tie!")
-			running = false
+			round_over = false
+			parry = true
+			player.parry()
+			enemy.parry()
+			running = true
 		timer_text.running = running
 	elif player.attacking and !running and !round_over:
 		round_over = true
@@ -68,8 +71,8 @@ func reload():
 	round_text.clear()
 	timer_text.reset()
 	start_delay.reset()
-	enemy.reset()
-	player.reset()
+	enemy.reset(true)
+	player.reset(true)
 	start_delay.start()
 	level_text.clear()
 	level_text.add_text("Level: %d" % GlobalVariables.current_level)

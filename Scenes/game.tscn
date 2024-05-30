@@ -157,7 +157,6 @@ stream = ExtResource("13_d3hws")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_ak5tc")
-autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("1_wwskl")]
 position = Vector2(-50, 0)
