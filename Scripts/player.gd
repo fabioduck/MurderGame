@@ -6,35 +6,51 @@ extends Area2D
 @onready var hit_vfx = $Hit_VFX
 @onready var hit_vfx_head = $Hit_VFX_Head
 @onready var hit_sfx = $Hit_SFX
+@onready var hit_box = $HitBox
 
 
 
-const SPEED = 300
-var sword_speed = 2.5
+const SPEED = 200
+const FRICTION = 4
+const PARRY_AMOUNT = 120
+
+var sword_speed = 3
+var parry_count = 0
 
 var dead = false
+var parry_in_progress = false
 var sword_hit = false
 var hit_detected = false
 # Remove?
 var attacking = false
+var parry_force = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# I should convert the hitbox toggling sword over to the same method used by the normal hitbox
 	sword.monitorable = false
 	sword.monitoring = false
 	sword.visible = false
+	hit_box.disabled = false
 	animated_sprite.speed_scale = 1.5
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and !parry_in_progress and !attacking:
 		attacking = true
 		if !game.round_over:
 			animated_sprite.speed_scale = sword_speed
 			animated_sprite.play("attack")
 
 func _physics_process(delta):
+	if(parry_force > 0):
+		transform = transform.translated(Vector2.LEFT * delta * parry_force)
+		parry_force -= FRICTION
+	else:
+		parry_force = 0
+		if(parry_count > 0 and parry_in_progress):
+			reset(false)
 	if attacking and !hit_detected:
 		transform = transform.translated(Vector2.RIGHT * delta * SPEED)
 
@@ -53,6 +69,7 @@ func toggleSword():
 	sword.monitorable = !sword.monitorable
 	sword.monitoring = !sword.monitoring
 	sword.visible = !sword.visible
+	hit_box.disabled = !hit_box.disabled
 	
 func handleHit(_opponent, is_sword):
 	if !hit_detected:
@@ -67,10 +84,18 @@ func handleHit(_opponent, is_sword):
 		hit_sfx.play()
 		attacking = false
 		hit_detected = true
+
+func parry():
+	parry_count += 1
+	hit_detected = false
+	parry_in_progress = true
+	parry_force = PARRY_AMOUNT
 		
-func reset():
-	position = Vector2(-50, 0)
+func reset(with_position):
+	if(with_position):
+		position = Vector2(-50, 0)
 	dead = false
+	parry_in_progress = false
 	sword_hit = false
 	hit_detected = false
 	attacking = false

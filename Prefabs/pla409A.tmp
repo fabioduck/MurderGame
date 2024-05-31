@@ -107,7 +107,7 @@ animations = [{
 size = Vector2(5, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id7oy"]
-size = Vector2(36, 15)
+size = Vector2(14, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rdpca"]
 atlas = ExtResource("3_lipjn")
@@ -177,7 +177,7 @@ shape = SubResource("RectangleShape2D_qcfhb")
 [node name="Sword_HitBox" type="Area2D" parent="."]
 
 [node name="Sword_HitBox" type="CollisionShape2D" parent="Sword_HitBox"]
-position = Vector2(0, -7.5)
+position = Vector2(11, -7.5)
 shape = SubResource("RectangleShape2D_id7oy")
 
 [node name="Hit_VFX" type="AnimatedSprite2D" parent="."]
