@@ -7,6 +7,9 @@ extends Node2D
 @onready var start_vfx = $Start_VFX
 @onready var start_delay = $Start_Delay
 @onready var music = $Music
+@onready var camera = $Camera2D
+@onready var canvas_layer = $CanvasLayer
+
 
 var running = false
 var round_over = false
@@ -21,6 +24,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	# Press mute input to toggle music
 	if Input.is_action_just_pressed("mute"):
 		if !music_muted:
 			music_muted = true
@@ -28,6 +32,14 @@ func _process(_delta):
 		else:
 			music_muted = false
 			music.play()
+	# Press shader input to toggle scan lines
+	if Input.is_action_just_pressed("shader"):
+		canvas_layer.visible = !canvas_layer.visible
+		# The scan lines shader zooms in the screen a bit so we scale the camera zoom accordingly
+		if(canvas_layer.visible):
+			camera.zoom = Vector2(3.79, 3.79)
+		else:
+			camera.zoom = Vector2(4.17, 4.17)
 	if(running and !round_over):
 		round_text.clear()
 		if enemy.dead and !player.dead:
