@@ -97,7 +97,7 @@ script = ExtResource("1_84eur")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -40)
-zoom = Vector2(4.17, 4.17)
+zoom = Vector2(3.79, 3.79)
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
@@ -320,7 +320,6 @@ texture = SubResource("GradientTexture2D_ebhd1")
 position = Vector2(-139, -61)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
