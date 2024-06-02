@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk063pmujtynf"]
+
+[ext_resource type="Texture2D" uid="uid://dkfih1f8ghkuf" path="res://Art/Enviroment/Desert Tileset 16x16.png" id="1_hrmxr"]
+[ext_resource type="Script" path="res://Scripts/Text.gd" id="1_mii3n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yhcu"]
+atlas = ExtResource("1_hrmxr")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qbck4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yhcu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Sign" type="AnimatedSprite2D"]
+position = Vector2(0, 5)
+sprite_frames = SubResource("SpriteFrames_qbck4")
+script = ExtResource("1_mii3n")
+
+[node name="Sign_Text" type="RichTextLabel" parent="."]
+offset_left = -5.0
+offset_top = -1.0
+offset_right = 35.0
+offset_bottom = 21.0
+scale = Vector2(0.267494, 0.267494)
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://biqw1ddwyksl"]
+[gd_scene load_steps=37 format=3 uid="uid://biqw1ddwyksl"]
 
 [ext_resource type="Texture2D" uid="uid://bwhi37epme6xf" path="res://Art/Characters/Player/Samurai-Sheet.png" id="1_4ytdr"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_ioxdl"]
@@ -6,21 +6,57 @@
 [ext_resource type="Texture2D" uid="uid://dcilvsp8380ia" path="res://Art/Characters/Enemy/SamuraiEnemy01-Sheet.png" id="4_euvn3"]
 [ext_resource type="AudioStream" uid="uid://2reqn2pabt61" path="res://Sounds/hit.wav" id="5_uwvgf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwg0i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw1uo"]
 atlas = ExtResource("1_4ytdr")
 region = Rect2(0, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v28bm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw3vl"]
 atlas = ExtResource("1_4ytdr")
 region = Rect2(36, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3u6pn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2vk3"]
 atlas = ExtResource("1_4ytdr")
 region = Rect2(72, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lcfw6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_37yed"]
 atlas = ExtResource("1_4ytdr")
 region = Rect2(108, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg2rb"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(144, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uuj4"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(180, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sjog"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(216, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bg1xu"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(0, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7skf"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(36, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpvu7"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(72, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hreit"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(108, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1wns"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(144, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvcky"]
+atlas = ExtResource("1_4ytdr")
+region = Rect2(180, 72, 36, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4bsom"]
 atlas = ExtResource("1_4ytdr")
@@ -58,20 +94,52 @@ region = Rect2(252, 0, 36, 36)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uwg0i")
+"texture": SubResource("AtlasTexture_dw1uo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v28bm")
+"texture": SubResource("AtlasTexture_iw3vl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3u6pn")
+"texture": SubResource("AtlasTexture_y2vk3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lcfw6")
+"texture": SubResource("AtlasTexture_37yed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg2rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uuj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sjog")
 }],
 "loop": false,
 "name": &"attack",
 "speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bg1xu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7skf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpvu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hreit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1wns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvcky")
+}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -165,10 +233,8 @@ script = ExtResource("1_ioxdl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_0fcot")
-animation = &"attack"
+animation = &"death"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(-7.5, -7.5)

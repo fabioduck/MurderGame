@@ -10,6 +10,7 @@ const FRICTION = 4
 const PARRY_AMOUNT = 120
 
 var sword_speed = GlobalVariables.current_level * 0.2 + 1
+var animation_speed = 1
 #var sword_speed = 3
 var parry_count = 0
 
@@ -62,8 +63,8 @@ func handleHit(_opponent, is_sword):
 		if !is_sword:
 			# RIP :(
 			dead = true
-			animated_sprite.play("idle")
-			animated_sprite.pause()
+			animated_sprite.speed_scale = animation_speed
+			animated_sprite.play("death")
 		attacking = false
 		hit_detected = true
 
@@ -77,11 +78,12 @@ func attack():
 	await get_tree().create_timer(1.0/GlobalVariables.current_level).timeout
 	attacking = true
 	if !game.round_over:
+			animated_sprite.speed_scale = sword_speed
 			animated_sprite.play("attack")
 			
 func reset(with_position):
 	if(with_position):
-		position = Vector2(50, 0)
+		position = Vector2(50, 1)
 	else:
 		attack()
 	dead = false
@@ -90,5 +92,6 @@ func reset(with_position):
 	hit_detected = false
 	attacking = false
 	sword_speed = GlobalVariables.current_level * 0.2 + 1
+	animated_sprite.speed_scale = animation_speed
 	animated_sprite.play("idle")
 	_ready()

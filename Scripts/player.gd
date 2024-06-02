@@ -15,6 +15,7 @@ const FRICTION = 4
 const PARRY_AMOUNT = 120
 
 var sword_speed = 3
+var animation_speed = 1
 var parry_count = 0
 
 var dead = false
@@ -76,8 +77,8 @@ func handleHit(_opponent, is_sword):
 		if !is_sword:
 			# RIP :(
 			dead = true
-			animated_sprite.play("idle")
-			animated_sprite.pause()
+			animated_sprite.speed_scale = animation_speed
+			animated_sprite.play("death")
 			hit_vfx_head.play()
 		else:
 			hit_vfx.play()
@@ -93,13 +94,13 @@ func parry():
 		
 func reset(with_position):
 	if(with_position):
-		position = Vector2(-50, 0)
+		position = Vector2(-50, 1)
 	dead = false
 	parry_in_progress = false
 	sword_hit = false
 	hit_detected = false
 	attacking = false
-	animated_sprite.speed_scale = 1.5
+	animated_sprite.speed_scale = animation_speed
 	animated_sprite.play("idle")
 	_ready()
 	

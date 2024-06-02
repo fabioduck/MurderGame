@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://4br6itq4g30m"]
+
+[ext_resource type="Texture2D" uid="uid://byqudorbvb2r6" path="res://Art/Enviroment/Background.png" id="1_odirj"]
+
+[node name="Background" type="Sprite2D"]
+z_index = -4096
+texture = ExtResource("1_odirj")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(128, 0)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_odirj")
+
+[node name="Background2" type="Sprite2D" parent="."]
+position = Vector2(-128, 0)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_odirj")
