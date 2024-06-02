@@ -21,9 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://car31oan6jj80" path="res://Prefabs/clouds.tscn" id="20_4c71n"]
 [ext_resource type="PackedScene" uid="uid://b2gghu4ypn56u" path="res://Prefabs/bird.tscn" id="21_kjfvq"]
 [ext_resource type="Shader" path="res://Shaders/game.gdshader" id="22_uxl82"]
-[ext_resource type="PackedScene" uid="uid://4br6itq4g30m" path="res://Prefabs/background.tscn" id="23_0atos"]
+[ext_resource type="PackedScene" path="res://Prefabs/background.tscn" id="23_0atos"]
 [ext_resource type="Texture2D" uid="uid://dkfih1f8ghkuf" path="res://Art/Enviroment/Desert Tileset 16x16.png" id="24_151gs"]
-[ext_resource type="PackedScene" uid="uid://dk063pmujtynf" path="res://Prefabs/sign.tscn" id="25_y4fm7"]
+[ext_resource type="PackedScene" path="res://Prefabs/sign.tscn" id="25_y4fm7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dvtea"]
 texture = ExtResource("9_dv74w")
