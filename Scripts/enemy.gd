@@ -5,6 +5,9 @@ extends Area2D
 @onready var game = $".."
 @onready var hit_box = $HitBox
 @onready var player = $"../Player"
+@onready var hit_sfx = $Hit_SFX
+@onready var hit_vfx = $Hit_VFX
+@onready var hit_vfx_head = $Hit_VFX_Head
 
 
 const SPEED = 200
@@ -18,6 +21,7 @@ var sword_speed = GlobalVariables.current_level * 0.2 + 1
 var animation_speed = 1
 #var sword_speed = 3
 var parry_count = 0
+var distance_moved = 0
 
 var dead = false
 var falling = false
@@ -27,6 +31,7 @@ var hit_detected = false
 # Remove?
 var attacking = false
 var parry_force = 0
+var start_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,8 +41,10 @@ func _ready():
 	sword.visible = false
 	hit_box.disabled = false
 	animated_sprite.speed_scale = sword_speed
+	start_position = position.x
 
 func _physics_process(delta):
+	distance_moved = start_position - position.x
 	if falling:
 		transform = transform.translated(Vector2.DOWN * delta * FALL_SPEED)
 	if position.x > MAX_X and !dead:
@@ -89,6 +96,10 @@ func handleHit(_opponent, is_sword):
 			dead = true
 			animated_sprite.speed_scale = animation_speed
 			animated_sprite.play("death")
+			hit_sfx.play()
+			hit_vfx_head.play()
+		else:
+			hit_vfx.play()
 		attacking = false
 		hit_detected = true
 
@@ -96,15 +107,18 @@ func parry():
 	hit_detected = false
 	parry_count += 1
 	parry_in_progress = true
-	print(player.distance_moved)
-	parry_force = player.distance_moved * 3.5
+	var difference_in_distance = abs(distance_moved - player.distance_moved)
+	if difference_in_distance < 10:
+			difference_in_distance = 10
+	print("E Pushback: %s" % (player.distance_moved * 2))
+	parry_force = (player.distance_moved * 2)
 
 func attack():
 	await get_tree().create_timer(1.0/GlobalVariables.current_level).timeout
-	attacking = true
 	if !game.round_over:
-			animated_sprite.speed_scale = sword_speed
-			animated_sprite.play("attack")
+		attacking = true
+		animated_sprite.speed_scale = sword_speed
+		animated_sprite.play("attack")
 			
 func reset(with_position):
 	if(with_position):

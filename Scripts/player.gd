@@ -8,6 +8,7 @@ extends Area2D
 @onready var hit_sfx = $Hit_SFX
 @onready var hit_box = $HitBox
 @onready var enemy = $"../Enemy"
+@onready var parry_sfx = $Parry_SFX
 
 
 
@@ -64,7 +65,10 @@ func _process(_delta):
 			animated_sprite.play("attack")
 func _physics_process(delta):
 	if(PARRY_AMOUNT == 0):
-		distance_moved = 40
+		# After blocking, set distance moved with a random offset
+		distance_moved = enemy.distance_moved + randi_range(-20, 20)
+		if distance_moved > 80:
+			distance_moved = 80
 	else:
 		distance_moved = position.x - start_position
 	if falling:
@@ -120,17 +124,28 @@ func handleHit(_opponent, is_sword):
 			animated_sprite.speed_scale = animation_speed
 			animated_sprite.play("death")
 			hit_vfx_head.play()
+			hit_sfx.play()
 		else:
 			hit_vfx.play()
-		hit_sfx.play()
 		attacking = false
 		hit_detected = true
 
 func parry():
+	parry_sfx.pitch_scale = randi_range(2,3)
+	parry_sfx.play()
 	parry_count += 1
 	hit_detected = false
 	parry_in_progress = true
-	parry_force = PARRY_AMOUNT
+	if(PARRY_AMOUNT != 0):
+		var difference_in_distance = abs(distance_moved - enemy.distance_moved)
+		if difference_in_distance < 10:
+			difference_in_distance = 10
+		print("P Distance: %s" % distance_moved)
+		print("E Distance %s" % enemy.distance_moved)
+		print("P Pushback: %s" % (enemy.distance_moved * 2))
+		parry_force = (enemy.distance_moved * 2)
+	else:
+		parry_force = 0
 		
 func reset(with_position):
 	if(with_position):

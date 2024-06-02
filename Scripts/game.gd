@@ -9,6 +9,7 @@ extends Node2D
 @onready var music = $Music
 @onready var camera = $Camera2D
 @onready var canvas_layer = $CanvasLayer
+@onready var panic = $panic
 
 
 var running = false
@@ -74,10 +75,13 @@ func _process(_delta):
 func _on_start_delay_timeout():
 	if !round_over:
 		start_vfx.play()
+		panic.play()
 		timer_text.running = true
 		enemy.attack()
 		running = true
 		timer_text.start_time = Time.get_ticks_msec()
+		await get_tree().create_timer(0.6).timeout
+		panic.stop()
 
 func reload():
 	resetting = true

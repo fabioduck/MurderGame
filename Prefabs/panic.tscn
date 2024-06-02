@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://c0m1dh46ldies"]
+
+[ext_resource type="Texture2D" uid="uid://dcilvsp8380ia" path="res://Art/Characters/Enemy/SamuraiEnemy01-Sheet.png" id="1_gjf0f"]
+[ext_resource type="Texture2D" uid="uid://bi60uxnsp0dup" path="res://Art/UI/UI Exclamation Mark-Sheet.png" id="1_vt2ta"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6i1aa"]
+atlas = ExtResource("1_gjf0f")
+region = Rect2(252, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w4gs"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnw3w"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esgxp"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp1mr"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhjs8"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpqfh"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m022c"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3klg8"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qjoq"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsvvs"]
+atlas = ExtResource("1_vt2ta")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pyh6o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6i1aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w4gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnw3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esgxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp1mr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhjs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpqfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w4gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m022c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3klg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qjoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsvvs")
+}],
+"loop": false,
+"name": &"default",
+"speed": 80.0
+}]
+
+[node name="panic" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_pyh6o")

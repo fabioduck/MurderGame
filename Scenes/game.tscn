@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ogx5s36fbv4i"]
+[gd_scene load_steps=21 format=3 uid="uid://ogx5s36fbv4i"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
 [ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Prefabs/player.tscn" id="1_wwskl"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dal1cmjie4nm3" path="res://Prefabs/enemy.tscn" id="12_35g4t"]
 [ext_resource type="AudioStream" uid="uid://u7biq6oy2b1c" path="res://Sounds/slam.mp3" id="13_d3hws"]
 [ext_resource type="AudioStream" uid="uid://cm8mtx3pnevu5" path="res://Sounds/transist-2.mp3" id="14_ak5tc"]
+[ext_resource type="PackedScene" uid="uid://c0m1dh46ldies" path="res://Prefabs/panic.tscn" id="17_4hj25"]
 [ext_resource type="PackedScene" uid="uid://car31oan6jj80" path="res://Prefabs/clouds.tscn" id="20_4c71n"]
 [ext_resource type="PackedScene" uid="uid://b2gghu4ypn56u" path="res://Prefabs/bird.tscn" id="21_kjfvq"]
 [ext_resource type="Shader" path="res://Shaders/game.gdshader" id="22_uxl82"]
@@ -56,7 +57,7 @@ script = ExtResource("1_84eur")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -40)
-zoom = Vector2(4.17, 4.17)
+zoom = Vector2(3.79, 3.79)
 
 [node name="Start_Delay" type="Timer" parent="."]
 one_shot = true
@@ -236,7 +237,6 @@ scale = Vector2(0.332387, 0.332387)
 position = Vector2(-139, -61)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -264,5 +264,11 @@ layer_2/tile_data = PackedInt32Array(-65529, 0, 2, -6, 131072, 1, -65542, 131072
 [node name="Sign" parent="." instance=ExtResource("25_y4fm7")]
 position = Vector2(48, 14)
 scale = Vector2(1.71355, 1.71355)
+
+[node name="panic" parent="." instance=ExtResource("17_4hj25")]
+position = Vector2(0, -68)
+scale = Vector2(2.23928, 2.23928)
+
+[node name="Area2D" type="Area2D" parent="."]
 
 [connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]

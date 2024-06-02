@@ -1,7 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://dal1cmjie4nm3"]
+[gd_scene load_steps=44 format=3 uid="uid://dal1cmjie4nm3"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_uq60w"]
 [ext_resource type="Texture2D" uid="uid://dcilvsp8380ia" path="res://Art/Characters/Enemy/SamuraiEnemy01-Sheet.png" id="2_lpr84"]
+[ext_resource type="AudioStream" uid="uid://2reqn2pabt61" path="res://Sounds/hit.wav" id="3_fqt6n"]
+[ext_resource type="Texture2D" uid="uid://cnn5xitien1o7" path="res://Art/VFX/HitVFX-Sheet.png" id="3_ube5s"]
+[ext_resource type="Texture2D" uid="uid://qs4cd71aiccy" path="res://Art/UI/Blood VFX-Sheet.png" id="4_f85d2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3jf34"]
 atlas = ExtResource("2_lpr84")
@@ -174,6 +177,106 @@ size = Vector2(5, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id7oy"]
 size = Vector2(22, 15)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_021g0"]
+atlas = ExtResource("3_ube5s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoywl"]
+atlas = ExtResource("3_ube5s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayh0l"]
+atlas = ExtResource("3_ube5s")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dukdr"]
+atlas = ExtResource("3_ube5s")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01y8c"]
+atlas = ExtResource("3_ube5s")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da8ya"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(246, 72, 41, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ymp5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_021g0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoywl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayh0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dukdr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01y8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da8ya")
+}],
+"loop": false,
+"name": &"default",
+"speed": 25.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1je6v"]
+atlas = ExtResource("4_f85d2")
+region = Rect2(0, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhcu2"]
+atlas = ExtResource("4_f85d2")
+region = Rect2(19, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ba64m"]
+atlas = ExtResource("4_f85d2")
+region = Rect2(38, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht7op"]
+atlas = ExtResource("4_f85d2")
+region = Rect2(57, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ya7j"]
+atlas = ExtResource("4_f85d2")
+region = Rect2(76, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v74rt"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(252, 72, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8msd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1je6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhcu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ba64m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht7op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ya7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v74rt")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
 [node name="Enemy" type="Area2D"]
 scale = Vector2(-1, 1)
 script = ExtResource("1_uq60w")
@@ -181,10 +284,8 @@ script = ExtResource("1_uq60w")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_0fcot")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(-7.5, -7.5)
@@ -195,6 +296,23 @@ shape = SubResource("RectangleShape2D_qcfhb")
 [node name="Sword_HitBox" type="CollisionShape2D" parent="Sword_HitBox"]
 position = Vector2(7, -7.5)
 shape = SubResource("RectangleShape2D_id7oy")
+
+[node name="Hit_VFX" type="AnimatedSprite2D" parent="."]
+z_index = 10
+position = Vector2(14, -12)
+sprite_frames = SubResource("SpriteFrames_ymp5l")
+frame = 5
+frame_progress = 1.0
+
+[node name="Hit_VFX_Head" type="AnimatedSprite2D" parent="."]
+z_index = 10
+position = Vector2(-8, -9)
+sprite_frames = SubResource("SpriteFrames_8msd4")
+frame = 5
+frame_progress = 1.0
+
+[node name="Hit_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fqt6n")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
