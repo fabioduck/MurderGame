@@ -64,7 +64,7 @@ func _process(_delta):
 			animated_sprite.play("attack")
 func _physics_process(delta):
 	if(PARRY_AMOUNT == 0):
-		distance_moved = 50
+		distance_moved = 40
 	else:
 		distance_moved = position.x - start_position
 	if falling:

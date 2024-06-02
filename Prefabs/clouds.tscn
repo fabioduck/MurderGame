@@ -17,6 +17,6 @@ scale = Vector2(20, 20)
 texture = ExtResource("2_u5urk")
 
 [node name="Cloud6" type="Sprite2D" parent="."]
-position = Vector2(875, 320)
+position = Vector2(920, 320)
 scale = Vector2(-20, 20)
 texture = ExtResource("2_u5urk")
