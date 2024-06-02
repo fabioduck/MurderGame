@@ -7,24 +7,33 @@ extends Area2D
 @onready var hit_vfx_head = $Hit_VFX_Head
 @onready var hit_sfx = $Hit_SFX
 @onready var hit_box = $HitBox
+@onready var enemy = $"../Enemy"
 
 
 
 const SPEED = 200
 const FRICTION = 4
-const PARRY_AMOUNT = 120
+const MIN_X = -80
+const FALL_SPEED = 120
 
+var PARRY_AMOUNT = 100
+
+
+var modified_speed = SPEED
 var sword_speed = 3
 var animation_speed = 1
 var parry_count = 0
+var distance_moved = 0
 
 var dead = false
+var falling = false
 var parry_in_progress = false
 var sword_hit = false
 var hit_detected = false
 # Remove?
 var attacking = false
 var parry_force = 0
+var start_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,17 +43,37 @@ func _ready():
 	sword.visible = false
 	hit_box.disabled = false
 	animated_sprite.speed_scale = 1.5
+	start_position = position.x
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("attack") and !parry_in_progress and !attacking:
-		attacking = true
+	if Input.is_action_just_pressed("attack") and !parry_in_progress and !attacking and !dead:
 		if !game.round_over:
+			attacking = true
+			modified_speed = SPEED
+			PARRY_AMOUNT = 120
 			animated_sprite.speed_scale = sword_speed
 			animated_sprite.play("attack")
-
+	if Input.is_action_just_pressed("heavy_attack") and !parry_in_progress and !attacking and !dead:
+		if !game.round_over:
+			attacking = true
+			modified_speed = SPEED * 0
+			PARRY_AMOUNT = 0
+			animated_sprite.speed_scale = sword_speed * 1.5
+			animated_sprite.play("attack")
 func _physics_process(delta):
+	if(PARRY_AMOUNT == 0):
+		distance_moved = 50
+	else:
+		distance_moved = position.x - start_position
+	if falling:
+		transform = transform.translated(Vector2.DOWN * delta * FALL_SPEED)
+	if position.x < MIN_X and !dead:
+		falling = true
+		dead = true
+		animated_sprite.speed_scale = animation_speed
+		animated_sprite.play("death")
 	if(parry_force > 0):
 		transform = transform.translated(Vector2.LEFT * delta * parry_force)
 		parry_force -= FRICTION
@@ -53,7 +82,17 @@ func _physics_process(delta):
 		if(parry_count > 0 and parry_in_progress):
 			reset(false)
 	if attacking and !hit_detected:
-		transform = transform.translated(Vector2.RIGHT * delta * SPEED)
+		transform = transform.translated(Vector2.RIGHT * delta * modified_speed)
+	if animated_sprite.frame > 3 and animated_sprite.animation == "attack":
+		sword.monitorable = true
+		sword.monitoring = true
+		sword.visible = true
+		hit_box.disabled = true
+	else:
+		sword.monitorable = false
+		sword.monitoring = false
+		sword.visible = false
+		hit_box.disabled = false
 
 func _on_area_entered(area):
 	handleHit(area, false)
@@ -63,14 +102,15 @@ func _on_sword_hit_box_area_entered(area):
 	handleHit(area, true)
 
 func _on_animated_sprite_2d_animation_finished():
-	await get_tree().create_timer(0.1).timeout
-	toggleSword()
+	if animated_sprite.animation == "death":
+		pass
 	
 func toggleSword():
 	sword.monitorable = !sword.monitorable
 	sword.monitoring = !sword.monitoring
 	sword.visible = !sword.visible
 	hit_box.disabled = !hit_box.disabled
+	print("Hitbox disabled: %s" % hit_box.disabled)
 	
 func handleHit(_opponent, is_sword):
 	if !hit_detected:
@@ -98,6 +138,7 @@ func reset(with_position):
 	dead = false
 	parry_in_progress = false
 	sword_hit = false
+	falling = false
 	hit_detected = false
 	attacking = false
 	animated_sprite.speed_scale = animation_speed

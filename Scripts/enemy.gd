@@ -4,10 +4,15 @@ extends Area2D
 @onready var sword = $Sword_HitBox
 @onready var game = $".."
 @onready var hit_box = $HitBox
+@onready var player = $"../Player"
+
 
 const SPEED = 200
 const FRICTION = 4
-const PARRY_AMOUNT = 120
+const MAX_X = 80
+const FALL_SPEED = 120
+
+var PARRY_AMOUNT = 120
 
 var sword_speed = GlobalVariables.current_level * 0.2 + 1
 var animation_speed = 1
@@ -15,6 +20,7 @@ var animation_speed = 1
 var parry_count = 0
 
 var dead = false
+var falling = false
 var parry_in_progress = false
 var sword_hit = false
 var hit_detected = false
@@ -32,6 +38,13 @@ func _ready():
 	animated_sprite.speed_scale = sword_speed
 
 func _physics_process(delta):
+	if falling:
+		transform = transform.translated(Vector2.DOWN * delta * FALL_SPEED)
+	if position.x > MAX_X and !dead:
+		falling = true
+		dead = true
+		animated_sprite.speed_scale = animation_speed
+		animated_sprite.play("death")
 	if(parry_force > 0):
 		transform = transform.translated(Vector2.RIGHT * delta * parry_force)
 		parry_force -= FRICTION
@@ -39,9 +52,19 @@ func _physics_process(delta):
 		parry_force = 0
 		if(parry_count > 0 and parry_in_progress):
 			reset(false)
-	if attacking and !hit_detected:
+	if attacking and !hit_detected and !dead:
 		transform = transform.translated(Vector2.LEFT * delta * SPEED)
-
+	if animated_sprite.frame > 3 and animated_sprite.animation == "attack":
+		sword.monitorable = true
+		sword.monitoring = true
+		sword.visible = true
+		hit_box.disabled = true
+	else:
+		sword.monitorable = false
+		sword.monitoring = false
+		sword.visible = false
+		hit_box.disabled = false
+		
 func _on_area_entered(area):
 	handleHit(area, false)
 
@@ -50,7 +73,8 @@ func _on_sword_hit_box_area_entered(area):
 	handleHit(area, true)
 
 func _on_animated_sprite_2d_animation_finished():
-	toggleSword()
+	#toggleSword()
+	pass
 	
 func toggleSword():
 	sword.monitorable = !sword.monitorable
@@ -72,7 +96,8 @@ func parry():
 	hit_detected = false
 	parry_count += 1
 	parry_in_progress = true
-	parry_force = PARRY_AMOUNT
+	print(player.distance_moved)
+	parry_force = player.distance_moved * 3.5
 
 func attack():
 	await get_tree().create_timer(1.0/GlobalVariables.current_level).timeout
@@ -90,6 +115,7 @@ func reset(with_position):
 	parry_in_progress = false
 	sword_hit = false
 	hit_detected = false
+	falling = false
 	attacking = false
 	sword_speed = GlobalVariables.current_level * 0.2 + 1
 	animated_sprite.speed_scale = animation_speed
