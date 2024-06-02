@@ -1,23 +1,63 @@
-[gd_scene load_steps=18 format=3 uid="uid://dal1cmjie4nm3"]
+[gd_scene load_steps=28 format=3 uid="uid://dal1cmjie4nm3"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_uq60w"]
 [ext_resource type="Texture2D" uid="uid://dcilvsp8380ia" path="res://Art/Characters/Enemy/SamuraiEnemy01-Sheet.png" id="2_lpr84"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l0vrr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jf34"]
 atlas = ExtResource("2_lpr84")
 region = Rect2(0, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iosxy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn1mw"]
 atlas = ExtResource("2_lpr84")
 region = Rect2(36, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3whnw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqpa7"]
 atlas = ExtResource("2_lpr84")
 region = Rect2(72, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gmh4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1yll"]
 atlas = ExtResource("2_lpr84")
 region = Rect2(108, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggh3x"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(144, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d1jc"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(180, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g584j"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(216, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x6ll"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(0, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0la73"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(36, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65wls"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(72, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c025f"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(108, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_purgq"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(144, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs2vb"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(180, 72, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mm4j"]
+atlas = ExtResource("2_lpr84")
+region = Rect2(216, 72, 36, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3jts"]
 atlas = ExtResource("2_lpr84")
@@ -55,20 +95,55 @@ region = Rect2(252, 0, 36, 36)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l0vrr")
+"texture": SubResource("AtlasTexture_3jf34")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iosxy")
+"texture": SubResource("AtlasTexture_xn1mw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3whnw")
+"texture": SubResource("AtlasTexture_tqpa7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5gmh4")
+"texture": SubResource("AtlasTexture_n1yll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggh3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0d1jc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g584j")
 }],
 "loop": false,
 "name": &"attack",
 "speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x6ll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0la73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65wls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c025f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_purgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs2vb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mm4j")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -113,10 +188,8 @@ script = ExtResource("1_uq60w")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_0fcot")
-animation = &"attack"
+animation = &"death"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(-7.5, -7.5)

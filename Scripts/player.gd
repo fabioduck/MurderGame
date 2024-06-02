@@ -76,8 +76,7 @@ func handleHit(_opponent, is_sword):
 		if !is_sword:
 			# RIP :(
 			dead = true
-			animated_sprite.play("idle")
-			animated_sprite.pause()
+			animated_sprite.play("death")
 			hit_vfx_head.play()
 		else:
 			hit_vfx.play()

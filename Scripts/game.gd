@@ -68,7 +68,7 @@ func _process(_delta):
 		round_text.add_text("Cheater")
 		GlobalVariables.current_level = 1
 	if round_over and !resetting:
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(1.5).timeout
 		reload()
 	
 func _on_start_delay_timeout():
