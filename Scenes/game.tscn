@@ -10,13 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://dal1cmjie4nm3" path="res://Prefabs/enemy.tscn" id="12_35g4t"]
 [ext_resource type="AudioStream" uid="uid://u7biq6oy2b1c" path="res://Sounds/slam.mp3" id="13_d3hws"]
 [ext_resource type="AudioStream" uid="uid://cm8mtx3pnevu5" path="res://Sounds/transist-2.mp3" id="14_ak5tc"]
-[ext_resource type="PackedScene" path="res://Prefabs/panic.tscn" id="17_4hj25"]
+[ext_resource type="PackedScene" uid="uid://c0m1dh46ldies" path="res://Prefabs/panic.tscn" id="17_4hj25"]
 [ext_resource type="PackedScene" uid="uid://car31oan6jj80" path="res://Prefabs/clouds.tscn" id="20_4c71n"]
 [ext_resource type="PackedScene" uid="uid://b2gghu4ypn56u" path="res://Prefabs/bird.tscn" id="21_kjfvq"]
 [ext_resource type="Shader" path="res://Shaders/game.gdshader" id="22_uxl82"]
-[ext_resource type="PackedScene" path="res://Prefabs/background.tscn" id="23_0atos"]
+[ext_resource type="PackedScene" uid="uid://4br6itq4g30m" path="res://Prefabs/background.tscn" id="23_0atos"]
 [ext_resource type="Texture2D" uid="uid://dkfih1f8ghkuf" path="res://Art/Enviroment/Desert Tileset 16x16.png" id="24_151gs"]
-[ext_resource type="PackedScene" path="res://Prefabs/sign.tscn" id="25_y4fm7"]
+[ext_resource type="PackedScene" uid="uid://dk063pmujtynf" path="res://Prefabs/sign.tscn" id="25_y4fm7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kyxu6"]
 shader = ExtResource("22_uxl82")
@@ -266,9 +266,7 @@ position = Vector2(48, 14)
 scale = Vector2(1.71355, 1.71355)
 
 [node name="panic" parent="." instance=ExtResource("17_4hj25")]
-position = Vector2(0, -68)
+position = Vector2(1, -68)
 scale = Vector2(2.23928, 2.23928)
-
-[node name="Area2D" type="Area2D" parent="."]
 
 [connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]

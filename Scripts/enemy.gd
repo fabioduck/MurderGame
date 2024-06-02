@@ -112,6 +112,8 @@ func parry():
 			difference_in_distance = 10
 	print("E Pushback: %s" % (player.distance_moved * 2))
 	parry_force = (player.distance_moved * 2)
+	if parry_force < 40:
+			parry_force = 40
 
 func attack():
 	await get_tree().create_timer(1.0/GlobalVariables.current_level).timeout

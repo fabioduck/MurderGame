@@ -63,6 +63,8 @@ func _process(_delta):
 			PARRY_AMOUNT = 0
 			animated_sprite.speed_scale = sword_speed * 1.5
 			animated_sprite.play("attack")
+			await get_tree().create_timer(0.7).timeout
+			reset(false)
 func _physics_process(delta):
 	if(PARRY_AMOUNT == 0):
 		# After blocking, set distance moved with a random offset
@@ -144,8 +146,10 @@ func parry():
 		print("E Distance %s" % enemy.distance_moved)
 		print("P Pushback: %s" % (enemy.distance_moved * 2))
 		parry_force = (enemy.distance_moved * 2)
+		if parry_force < 40:
+			parry_force = 40
 	else:
-		parry_force = 0
+		parry_force = 80
 		
 func reset(with_position):
 	if(with_position):
