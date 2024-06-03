@@ -10,21 +10,37 @@ extends Node2D
 @onready var camera = $Camera2D
 @onready var canvas_layer = $CanvasLayer
 @onready var panic = $panic
+@onready var ui = $UI
 
+var sfx_volume = -6
 
 var running = false
 var round_over = false
 var resetting = false
 var music_muted = false
 var parry = false
+var paused = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	level_text.clear()
-	level_text.add_text("Level: %d" % GlobalVariables.current_level)
+	show_round_text()
+	set_highscore()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _physics_process(_delta):
+	start_vfx.volume_db = sfx_volume
+	if Input.is_action_just_pressed("pause"):
+		paused = !paused
+	if (!paused):
+		ui.visible = false
+		if start_delay.is_stopped() and !running:
+			start_delay.start()
+		start_delay.paused = false
+	else:
+		ui.visible = true
+		start_delay.paused = true
+			
 	# Press mute input to toggle music
 	if Input.is_action_just_pressed("mute"):
 		if !music_muted:
@@ -52,7 +68,10 @@ func _process(_delta):
 		elif player.dead:
 			round_over = true
 			round_text.push_color(Color(0.8, 0.2, 0.2))
-			round_text.add_text("You Died\nLevel: %s" % GlobalVariables.current_level)
+			if GlobalVariables.current_level == 1:
+				round_text.add_text("You had\n%s hat :(" % (GlobalVariables.current_level))
+			else:
+				round_text.add_text("You had\n%s hats" % (GlobalVariables.current_level))
 			GlobalVariables.current_level = 1
 			running = false
 		elif player.hit_detected and !player.dead and !enemy.dead:
@@ -69,6 +88,7 @@ func _process(_delta):
 		round_text.add_text("Cheater")
 		GlobalVariables.current_level = 1
 	if round_over and !resetting:
+		resetting = true
 		await get_tree().create_timer(1.5).timeout
 		reload()
 	
@@ -84,15 +104,27 @@ func _on_start_delay_timeout():
 		panic.stop()
 
 func reload():
-	resetting = true
+	print("Game reset initiated")
 	round_over = false
 	running = false
-	round_text.clear()
+	show_round_text()
 	timer_text.reset()
 	start_delay.reset()
 	enemy.reset(true)
 	player.reset(true)
 	start_delay.start()
-	level_text.clear()
-	level_text.add_text("Level: %d" % GlobalVariables.current_level)
+	set_highscore()
 	resetting = false
+	
+func set_highscore():
+	if GlobalVariables.current_level > GlobalVariables.highscore:
+		GlobalVariables.highscore += 1
+	level_text.clear()
+	level_text.add_text("Hat Score: %d" % GlobalVariables.highscore)
+	
+func show_round_text():
+	round_text.clear()
+	round_text.push_color(Color(0.7, 0.6, 0.5))
+	round_text.add_text("Level: %d" % GlobalVariables.current_level)
+	await get_tree().create_timer(1).timeout
+	round_text.clear()

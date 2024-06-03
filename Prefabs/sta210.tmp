@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1nmwhl4mckgc"]
+
+[ext_resource type="Texture2D" uid="uid://cl74hsc2kt6ld" path="res://Art/UI/UI Background.png" id="1_bmw56"]
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_j1a1b"]
+[ext_resource type="PackedScene" uid="uid://xqh8020afhrw" path="res://Prefabs/play_btn.tscn" id="2_20gmj"]
+[ext_resource type="PackedScene" uid="uid://c2ros0eii12lq" path="res://Prefabs/settings_btn.tscn" id="3_kupus"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = -6.0
+offset_right = 46.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+script = ExtResource("1_j1a1b")
+
+[node name="UiBackground" type="Sprite2D" parent="."]
+z_index = 4095
+position = Vector2(-46, 6)
+scale = Vector2(3.92844, 3.92844)
+texture = ExtResource("1_bmw56")
+
+[node name="Play_Button" parent="UiBackground" instance=ExtResource("2_20gmj")]
+z_index = 4096
+position = Vector2(-13.2368, 1.01822)
+scale = Vector2(1.38917, 1.38917)
+
+[node name="Settings_Button" parent="UiBackground" instance=ExtResource("3_kupus")]
+z_index = 4096
+position = Vector2(14.0005, 1.01822)
+scale = Vector2(1.3891, 1.3891)
+
+[node name="Settings_Background" type="Sprite2D" parent="."]
+visible = false
+z_index = 4095
+position = Vector2(-46, 6)
+scale = Vector2(3.92844, 3.92844)
+texture = ExtResource("1_bmw56")

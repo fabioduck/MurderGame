@@ -1,0 +1,114 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1nmwhl4mckgc"]
+
+[ext_resource type="Texture2D" uid="uid://cl74hsc2kt6ld" path="res://Art/UI/UI Background.png" id="1_bmw56"]
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_j1a1b"]
+[ext_resource type="PackedScene" uid="uid://xqh8020afhrw" path="res://Prefabs/play_btn.tscn" id="2_20gmj"]
+[ext_resource type="PackedScene" uid="uid://c2ros0eii12lq" path="res://Prefabs/settings_btn.tscn" id="3_kupus"]
+[ext_resource type="PackedScene" uid="uid://3vygsytm3nju" path="res://Prefabs/back_btn.tscn" id="5_xryyk"]
+[ext_resource type="Texture2D" uid="uid://ducy8ojk8mf61" path="res://Art/UI/UI-Back.png" id="6_dr7s2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gem2t"]
+atlas = ExtResource("6_dr7s2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8apo5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gem2t")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqapu"]
+atlas = ExtResource("6_dr7s2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ng2uv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqapu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = -6.0
+offset_right = 46.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+script = ExtResource("1_j1a1b")
+
+[node name="UiBackground" type="Sprite2D" parent="."]
+z_index = 4095
+position = Vector2(-46, 6)
+scale = Vector2(3.92844, 3.92844)
+texture = ExtResource("1_bmw56")
+
+[node name="Play_Button" parent="UiBackground" instance=ExtResource("2_20gmj")]
+z_index = 4096
+position = Vector2(-13.2368, 1.01822)
+scale = Vector2(1.38917, 1.38917)
+
+[node name="Settings_Button" parent="UiBackground" instance=ExtResource("3_kupus")]
+z_index = 4096
+position = Vector2(14.0005, 1.01822)
+scale = Vector2(1.3891, 1.3891)
+
+[node name="Back_Button" type="Sprite2D" parent="."]
+visible = false
+z_index = 4095
+position = Vector2(-46, 6)
+scale = Vector2(3.92844, 3.92844)
+texture = ExtResource("1_bmw56")
+
+[node name="Music Slider" type="HSlider" parent="Back_Button"]
+offset_left = -10.9458
+offset_top = -8.65483
+offset_right = 124.054
+offset_bottom = 7.34517
+scale = Vector2(0.272603, 0.272603)
+min_value = -20.0
+max_value = 10.0
+
+[node name="Sound Slider" type="HSlider" parent="Back_Button"]
+offset_left = -10.9458
+offset_top = -0.763661
+offset_right = 124.054
+offset_bottom = 15.2363
+scale = Vector2(0.272603, 0.272603)
+min_value = -20.0
+max_value = 10.0
+
+[node name="Settings_Button" parent="Back_Button" instance=ExtResource("5_xryyk")]
+z_index = 4096
+position = Vector2(1.94209e-06, 11.964)
+scale = Vector2(0.812401, 0.812401)
+
+[node name="Music_Icon" type="AnimatedSprite2D" parent="Back_Button"]
+z_index = 4096
+position = Vector2(-19.3461, -6.87296)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_8apo5")
+
+[node name="Sound_Icon" type="AnimatedSprite2D" parent="Back_Button"]
+z_index = 4096
+position = Vector2(-19.3461, 1.01822)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_ng2uv")
+
+[connection signal="value_changed" from="Back_Button/Music Slider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Back_Button/Sound Slider" to="." method="_on_sound_slider_value_changed"]

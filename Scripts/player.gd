@@ -35,6 +35,7 @@ var hit_detected = false
 var attacking = false
 var parry_force = 0
 var start_position
+var blocking = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,22 +50,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("attack") and !parry_in_progress and !attacking and !dead:
+	hit_sfx.volume_db = game.sfx_volume
+	if Input.is_action_just_pressed("attack") and !parry_in_progress and !attacking and !dead and !game.paused:
 		if !game.round_over:
 			attacking = true
 			modified_speed = SPEED
 			PARRY_AMOUNT = 120
 			animated_sprite.speed_scale = sword_speed
 			animated_sprite.play("attack")
-	if Input.is_action_just_pressed("heavy_attack") and !parry_in_progress and !attacking and !dead:
+	if Input.is_action_just_pressed("heavy_attack") and !parry_in_progress and !attacking and !dead and !game.paused:
 		if !game.round_over:
+			blocking = true
 			attacking = true
 			modified_speed = SPEED * 0
 			PARRY_AMOUNT = 0
 			animated_sprite.speed_scale = sword_speed * 1.5
 			animated_sprite.play("attack")
-			await get_tree().create_timer(0.7).timeout
-			reset(false)
+	if Input.is_action_just_released("heavy_attack") and blocking:
+		blocking = false
+		reset(false)
 func _physics_process(delta):
 	if(PARRY_AMOUNT == 0):
 		# After blocking, set distance moved with a random offset
@@ -134,6 +138,7 @@ func handleHit(_opponent, is_sword):
 
 func parry():
 	parry_sfx.pitch_scale = randi_range(2,3)
+	parry_sfx.volume_db = game.sfx_volume
 	parry_sfx.play()
 	parry_count += 1
 	hit_detected = false
@@ -149,11 +154,14 @@ func parry():
 		if parry_force < 40:
 			parry_force = 40
 	else:
-		parry_force = 80
+		parry_force = 85
 		
 func reset(with_position):
 	if(with_position):
 		position = Vector2(-50, 1)
+		print("Player reset with pos!")
+	else:
+		print("Player reset!")
 	dead = false
 	parry_in_progress = false
 	sword_hit = false

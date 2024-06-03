@@ -1,16 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://ogx5s36fbv4i"]
+[gd_scene load_steps=22 format=3 uid="uid://ogx5s36fbv4i"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
 [ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Prefabs/player.tscn" id="1_wwskl"]
 [ext_resource type="Script" path="res://Scripts/Timer.gd" id="4_74j6p"]
+[ext_resource type="AudioStream" uid="uid://dr2q2xk2wvagl" path="res://Sounds/Boss Battle #1 V2.wav" id="5_ftvvl"]
 [ext_resource type="Texture2D" uid="uid://d4kabukj32vo8" path="res://Art/Enviroment/Sun.png" id="6_upwc4"]
 [ext_resource type="Texture2D" uid="uid://b2fwyx25p8bc7" path="res://Art/Enviroment/Moutain Left.png" id="7_24skh"]
 [ext_resource type="Texture2D" uid="uid://cu7b2yeuk8wii" path="res://Art/Enviroment/Moutain Middle.png" id="8_8vpmg"]
 [ext_resource type="Texture2D" uid="uid://jj2k8nqburx0" path="res://Art/Enviroment/Moutain Right.png" id="9_j5blr"]
 [ext_resource type="PackedScene" uid="uid://dal1cmjie4nm3" path="res://Prefabs/enemy.tscn" id="12_35g4t"]
 [ext_resource type="AudioStream" uid="uid://u7biq6oy2b1c" path="res://Sounds/slam.mp3" id="13_d3hws"]
-[ext_resource type="AudioStream" uid="uid://cm8mtx3pnevu5" path="res://Sounds/transist-2.mp3" id="14_ak5tc"]
 [ext_resource type="PackedScene" uid="uid://c0m1dh46ldies" path="res://Prefabs/panic.tscn" id="17_4hj25"]
+[ext_resource type="PackedScene" uid="uid://c1nmwhl4mckgc" path="res://Prefabs/start_menu.tscn" id="18_fdkaw"]
 [ext_resource type="PackedScene" uid="uid://car31oan6jj80" path="res://Prefabs/clouds.tscn" id="20_4c71n"]
 [ext_resource type="PackedScene" uid="uid://b2gghu4ypn56u" path="res://Prefabs/bird.tscn" id="21_kjfvq"]
 [ext_resource type="Shader" path="res://Shaders/game.gdshader" id="22_uxl82"]
@@ -61,7 +62,6 @@ zoom = Vector2(3.79, 3.79)
 
 [node name="Start_Delay" type="Timer" parent="."]
 one_shot = true
-autostart = true
 script = ExtResource("4_74j6p")
 
 [node name="Sun" type="Sprite2D" parent="."]
@@ -75,7 +75,9 @@ offset_left = -135.0
 offset_top = -119.0
 offset_right = -65.0
 offset_bottom = -73.0
-text = "Level: 1"
+scale = Vector2(0.782806, 0.782806)
+mouse_filter = 2
+text = "Hat Score: 1"
 fit_content = true
 autowrap_mode = 0
 
@@ -91,14 +93,19 @@ offset_right = 4.0
 offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 fit_content = true
 autowrap_mode = 0
 
 [node name="Start_VFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_d3hws")
+volume_db = -6.0
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("14_ak5tc")
+position = Vector2(0, 1)
+stream = ExtResource("5_ftvvl")
+volume_db = -12.0
+autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("1_wwskl")]
 position = Vector2(-50, 1)
@@ -246,6 +253,7 @@ offset_top = -148.0
 offset_right = -152.0
 offset_bottom = -108.0
 scale = Vector2(9.4897, 6.16337)
+mouse_filter = 2
 
 [node name="Background" parent="." instance=ExtResource("23_0atos")]
 position = Vector2(0, -55)
@@ -268,5 +276,12 @@ scale = Vector2(1.71355, 1.71355)
 [node name="panic" parent="." instance=ExtResource("17_4hj25")]
 position = Vector2(1, -68)
 scale = Vector2(2.23928, 2.23928)
+
+[node name="UI" parent="." instance=ExtResource("18_fdkaw")]
+offset_left = 28.0
+offset_top = -46.0
+offset_right = 28.0
+offset_bottom = -46.0
+scale = Vector2(0.609963, 0.609963)
 
 [connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]

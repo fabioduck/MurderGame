@@ -1,0 +1,272 @@
+[gd_scene load_steps=21 format=3 uid="uid://ogx5s36fbv4i"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_84eur"]
+[ext_resource type="PackedScene" uid="uid://biqw1ddwyksl" path="res://Prefabs/player.tscn" id="1_wwskl"]
+[ext_resource type="Script" path="res://Scripts/Timer.gd" id="4_74j6p"]
+[ext_resource type="Texture2D" uid="uid://d4kabukj32vo8" path="res://Art/Enviroment/Sun.png" id="6_upwc4"]
+[ext_resource type="Texture2D" uid="uid://b2fwyx25p8bc7" path="res://Art/Enviroment/Moutain Left.png" id="7_24skh"]
+[ext_resource type="Texture2D" uid="uid://cu7b2yeuk8wii" path="res://Art/Enviroment/Moutain Middle.png" id="8_8vpmg"]
+[ext_resource type="Texture2D" uid="uid://jj2k8nqburx0" path="res://Art/Enviroment/Moutain Right.png" id="9_j5blr"]
+[ext_resource type="PackedScene" uid="uid://dal1cmjie4nm3" path="res://Prefabs/enemy.tscn" id="12_35g4t"]
+[ext_resource type="AudioStream" uid="uid://u7biq6oy2b1c" path="res://Sounds/slam.mp3" id="13_d3hws"]
+[ext_resource type="AudioStream" uid="uid://cm8mtx3pnevu5" path="res://Sounds/transist-2.mp3" id="14_ak5tc"]
+[ext_resource type="PackedScene" uid="uid://c0m1dh46ldies" path="res://Prefabs/panic.tscn" id="17_4hj25"]
+[ext_resource type="PackedScene" uid="uid://car31oan6jj80" path="res://Prefabs/clouds.tscn" id="20_4c71n"]
+[ext_resource type="PackedScene" uid="uid://b2gghu4ypn56u" path="res://Prefabs/bird.tscn" id="21_kjfvq"]
+[ext_resource type="Shader" path="res://Shaders/game.gdshader" id="22_uxl82"]
+[ext_resource type="PackedScene" uid="uid://4br6itq4g30m" path="res://Prefabs/background.tscn" id="23_0atos"]
+[ext_resource type="Texture2D" uid="uid://dkfih1f8ghkuf" path="res://Art/Enviroment/Desert Tileset 16x16.png" id="24_151gs"]
+[ext_resource type="PackedScene" uid="uid://dk063pmujtynf" path="res://Prefabs/sign.tscn" id="25_y4fm7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyxu6"]
+shader = ExtResource("22_uxl82")
+shader_parameter/scan_line_count = 92.67
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d0ot3"]
+texture = ExtResource("24_151gs")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_scabn"]
+sources/0 = SubResource("TileSetAtlasSource_d0ot3")
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_84eur")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -40)
+zoom = Vector2(3.79, 3.79)
+
+[node name="Start_Delay" type="Timer" parent="."]
+one_shot = true
+autostart = true
+script = ExtResource("4_74j6p")
+
+[node name="Sun" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(0, -64)
+scale = Vector2(1.92188, 1.92188)
+texture = ExtResource("6_upwc4")
+
+[node name="Level_Text" type="RichTextLabel" parent="."]
+offset_left = -135.0
+offset_top = -119.0
+offset_right = -65.0
+offset_bottom = -73.0
+text = "Level: 1"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Round_Text" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -71.0
+offset_right = 4.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+fit_content = true
+autowrap_mode = 0
+
+[node name="Start_VFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_d3hws")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ak5tc")
+
+[node name="Player" parent="." instance=ExtResource("1_wwskl")]
+position = Vector2(-50, 1)
+
+[node name="Enemy" parent="." instance=ExtResource("12_35g4t")]
+position = Vector2(50, 1)
+rotation = -3.14159
+scale = Vector2(1, -1)
+
+[node name="Mountains" type="Node2D" parent="."]
+z_index = -3
+position = Vector2(-280, -13)
+scale = Vector2(2.50237, 2.70162)
+
+[node name="MoutainMiddle" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(44.0341, 0.453758)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainLeft" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(-19.9659, 0.453758)
+texture = ExtResource("7_24skh")
+
+[node name="MoutainMiddle2" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(12.0341, 1.45376)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle3" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(207.079, 0.0836093)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle4" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(175.079, 1.08361)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainLeft2" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(143.079, 0.0836093)
+texture = ExtResource("7_24skh")
+
+[node name="MoutainRight" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(239.079, 0.0836093)
+texture = ExtResource("9_j5blr")
+
+[node name="MoutainRight2" type="Sprite2D" parent="Mountains"]
+z_index = -2
+position = Vector2(76.0341, 0.453758)
+texture = ExtResource("9_j5blr")
+
+[node name="Mountains2" type="Node2D" parent="."]
+z_index = -3
+position = Vector2(-62, -5)
+scale = Vector2(1.92047, 2.07338)
+
+[node name="MoutainMiddle" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(44.0341, 0.453758)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainLeft" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(-19.9659, 0.453758)
+texture = ExtResource("7_24skh")
+
+[node name="MoutainMiddle2" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(12.0341, 1.45376)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle3" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(207.079, 0.0836093)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle4" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(175.079, 1.08361)
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainLeft2" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(143.079, 0.0836093)
+texture = ExtResource("7_24skh")
+
+[node name="MoutainRight" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(239.079, 0.0836093)
+texture = ExtResource("9_j5blr")
+
+[node name="MoutainRight2" type="Sprite2D" parent="Mountains2"]
+z_index = -2
+position = Vector2(76.0341, 0.453758)
+texture = ExtResource("9_j5blr")
+
+[node name="MoutainMiddle5" type="Sprite2D" parent="Mountains2"]
+z_index = -3
+position = Vector2(43.3138, 29.9869)
+rotation = -3.14159
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle7" type="Sprite2D" parent="Mountains2"]
+z_index = -3
+position = Vector2(57.2776, 30.3851)
+rotation = -3.14159
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle6" type="Sprite2D" parent="Mountains2"]
+z_index = -3
+position = Vector2(11.3137, 30.9869)
+rotation = -3.14159
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainMiddle8" type="Sprite2D" parent="Mountains2"]
+z_index = -3
+position = Vector2(-19.7868, 33.279)
+rotation = -3.14159
+texture = ExtResource("8_8vpmg")
+
+[node name="MoutainRight3" type="Sprite2D" parent="Mountains2"]
+z_index = -3
+position = Vector2(75.3138, 29.9869)
+rotation = -3.14159
+texture = ExtResource("9_j5blr")
+
+[node name="Clouds" parent="." instance=ExtResource("20_4c71n")]
+z_index = -10
+position = Vector2(-171, -126)
+scale = Vector2(0.332387, 0.332387)
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("21_kjfvq")]
+position = Vector2(-139, -61)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_kyxu6")
+offset_left = -192.0
+offset_top = -148.0
+offset_right = -152.0
+offset_bottom = -108.0
+scale = Vector2(9.4897, 6.16337)
+
+[node name="Background" parent="." instance=ExtResource("23_0atos")]
+position = Vector2(0, -55)
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 28)
+tile_set = SubResource("TileSet_scabn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-5, 196608, 1, -65541, 196608, 1, -131077, 196608, 1, -65532, 196608, 1, -131068, 196608, 1, -196604, 196608, 1, -196613, 196608, 0, -262140, 196608, 0, 65531, 131072, 4, 4, 196608, 4, 5, 196608, 268435460, -6, 65536, 3, -7, 0, 3, 65529, 0, 4, 65528, 0, 268435460, -8, 0, 268435459, -9, 65536, 268435459, 65527, 65536, 268435460, 65530, 65536, 4, 6, 131072, 268435460, 7, 65536, 268435460, 8, 0, 268435460, 65532, 65536, 3, 3, 65536, 268435459, -65528, 0, 268435459, -65529, 65536, 268435459)
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array(-131068, 65536, 2, -131069, 65536, 2, -131070, 65536, 2, -131071, 65536, 2, -131072, 65536, 2, -65537, 65536, 2, -65538, 65536, 2, -65539, 65536, 2, -65540, 65536, 2, -65541, 65536, 2, -196613, 196608, 2, -262140, 196608, 2, -262141, 262144, 2, -262142, 262144, 2, -196612, 262144, 2, -196611, 196608, 2, -196610, 262144, 2, -196609, 196608, 2, -262144, 262144, 2, -262143, 196608, 2, 4, 196608, 1, 65531, 196608, 1)
+layer_2/name = "Plants"
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array(-65529, 0, 2, -6, 131072, 1, -65542, 131072, 0, -8, 0, 1, -65544, 0, 0, -65528, 131072, 1, -131064, 131072, 0)
+
+[node name="Sign" parent="." instance=ExtResource("25_y4fm7")]
+position = Vector2(48, 14)
+scale = Vector2(1.71355, 1.71355)
+
+[node name="panic" parent="." instance=ExtResource("17_4hj25")]
+position = Vector2(1, -68)
+scale = Vector2(2.23928, 2.23928)
+
+[connection signal="timeout" from="Start_Delay" to="." method="_on_start_delay_timeout"]

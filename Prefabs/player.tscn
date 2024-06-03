@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://biqw1ddwyksl"]
+[gd_scene load_steps=47 format=3 uid="uid://biqw1ddwyksl"]
 
 [ext_resource type="Texture2D" uid="uid://bwhi37epme6xf" path="res://Art/Characters/Player/Samurai-Sheet.png" id="1_4ytdr"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_ioxdl"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qs4cd71aiccy" path="res://Art/UI/Blood VFX-Sheet.png" id="5_ustcx"]
 [ext_resource type="AudioStream" uid="uid://2reqn2pabt61" path="res://Sounds/hit.wav" id="5_uwvgf"]
 [ext_resource type="AudioStream" uid="uid://u7biq6oy2b1c" path="res://Sounds/slam.mp3" id="6_s8l5k"]
+[ext_resource type="PackedScene" uid="uid://b4qk3a7v1g804" path="res://Prefabs/hat_stack.tscn" id="8_noefb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dw1uo"]
 atlas = ExtResource("1_4ytdr")
@@ -319,6 +320,11 @@ stream = ExtResource("5_uwvgf")
 stream = ExtResource("6_s8l5k")
 pitch_scale = 2.0
 
+[node name="HatStack" parent="." instance=ExtResource("8_noefb")]
+position = Vector2(-8, -18)
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_changed" from="AnimatedSprite2D" to="HatStack" method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="HatStack" method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="Sword_HitBox" to="." method="_on_sword_hit_box_area_entered"]

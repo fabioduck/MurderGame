@@ -40,10 +40,10 @@ func _ready():
 	sword.monitoring = false
 	sword.visible = false
 	hit_box.disabled = false
-	animated_sprite.speed_scale = sword_speed
 	start_position = position.x
 
 func _physics_process(delta):
+	hit_sfx.volume_db = game.sfx_volume
 	distance_moved = start_position - position.x
 	if falling:
 		transform = transform.translated(Vector2.DOWN * delta * FALL_SPEED)
