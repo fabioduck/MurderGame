@@ -76,7 +76,7 @@ func _process(delta):
 		else:
 			transform = transform.translated(Vector2.LEFT * delta * SPEED)
 		# If outside of spawn area, restart!
-		if position.x > 201 || position.x < -201:
+		if position.x > 210 || position.x < -210:
 			waiting = true
 			# Wait for spawn delay
 			await get_tree().create_timer(randi_range(SPAWN_MIN_DELAY, SPAWN_MAX_DELAY)).timeout
